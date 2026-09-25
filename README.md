@@ -120,15 +120,21 @@ reported as an unexpected API response instead of an empty quota.
 
 These are internal/undocumented Google APIs. They can change without notice.
 
-## Authentication expiry
+## Authentication & Token Handling
 
-The program intentionally does not refresh OAuth itself. If Google returns
-401/403, use/open the official Antigravity ACP agent in Zed so Google's ACP
-process can refresh or re-authenticate, then run the quota task again.
+The program supports both direct access tokens and OAuth refresh token credentials
+stored in `acp_token.json`:
+
+- If an `access_token` is present in the file, it is used directly.
+- If only OAuth refresh credentials (`refresh_token`, `client_id`, etc.) are present,
+  the program automatically exchanges the refresh token with Google's OAuth endpoint
+  in memory to obtain a fresh access token without modifying `acp_token.json`.
+- If Google returns 401/403 or the refresh token expires, open or re-authenticate the
+  official Antigravity ACP agent in Zed, then run the quota task again.
 
 ## Security
 
-- OAuth access token is never printed.
+- OAuth access and refresh tokens are never printed.
 - Token is only sent to Google's Cloud Code PA endpoint as a Bearer token.
 - No MCP server.
 - No AI request.
