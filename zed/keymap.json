@@ -1,0 +1,14 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-alt-q": [
+        "task::Spawn",
+        {
+          "task_name": "Antigravity: Check quota",
+          "reveal_target": "dock"
+        }
+      ]
+    }
+  }
+]

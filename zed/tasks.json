@@ -1,0 +1,24 @@
+[
+  {
+    "label": "Antigravity: Check quota",
+    "command": "$HOME/.local/bin/antigravity-quota",
+    "args": [],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "show_summary": false,
+    "show_command": false,
+    "save": "none"
+  },
+  {
+    "label": "Antigravity: Check quota (JSON)",
+    "command": "$HOME/.local/bin/antigravity-quota",
+    "args": ["--json"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "show_summary": false,
+    "show_command": false,
+    "save": "none"
+  }
+]
