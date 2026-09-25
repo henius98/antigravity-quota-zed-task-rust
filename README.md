@@ -10,6 +10,7 @@ Zed task
   -> ~/.gemini/antigravity-acp/acp_token.json
   -> Google Cloud Code PA internal API
   -> terminal output in Zed
+  -> quota snapshot saved to SQLite history
 ```
 
 No model request is made, so running this task does not consume Gemini/Claude/GPT
@@ -83,6 +84,39 @@ or:
 
 ```bash
 export ANTIGRAVITY_ACP_TOKEN_FILE=/path/to/acp_token.json
+```
+
+## Quota History
+
+Every quota check automatically saves a snapshot to a local SQLite database at:
+
+```text
+~/.local/share/antigravity-quota/quota_history.db
+```
+
+View recent history (default: last 20 snapshots):
+
+```bash
+antigravity-quota history
+antigravity-quota history --last 50
+```
+
+The history table shows timestamp, quota group, bucket name, and remaining
+percentage for each recorded snapshot.
+
+### Database schema
+
+Two tables:
+
+- **`quota_snapshots`** — one row per quota check (timestamp, project, tier)
+- **`quota_buckets`** — one row per bucket per snapshot (group, bucket name,
+  remaining fraction/percent, reset time, window)
+
+You can query the database directly with any SQLite client:
+
+```bash
+sqlite3 ~/.local/share/antigravity-quota/quota_history.db \
+  "SELECT * FROM quota_snapshots ORDER BY timestamp DESC LIMIT 5;"
 ```
 
 ## Expected credential

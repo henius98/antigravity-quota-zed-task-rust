@@ -20,5 +20,16 @@
     "show_summary": false,
     "show_command": false,
     "save": "none"
+  },
+  {
+    "label": "Antigravity: Quota history",
+    "command": "$HOME/.local/bin/antigravity-quota",
+    "args": ["history"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "show_summary": false,
+    "show_command": false,
+    "save": "none"
   }
 ]
